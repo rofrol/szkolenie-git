@@ -21,19 +21,230 @@
 
 class: center, middle
 
-# Title
+# Szkolenie z gita
 
 ---
 
-# Agenda
+# Warsztat
 
-1. Introduction
-2. Deep-dive
-3. ...
+> What I cannot create, I do not understand.
+>
+> -- <cite>Richard Feynman</cite>
 
 ---
 
-# Introduction
+# Podstawy
+
+> It is important to view knowledge as sort of a semantic tree
+>
+> -- make sure you understand the fundamental principles, ie the trunk and big branches,
+>
+> before you get into the leaves/details or there is nothing for them to hang on to
+>
+> -- <cite>Elon Musk</cite>
+
+---
+
+# Czym jest git
+
+Czy git to:
+
+1. Graf skierowany
+2. Struktura danych z
+2. Baza klucz-wartość
+3. Struktura danych z języków funkcyjnych
+4. Stupid content tracker
+
+---
+
+# Wstępna konfiguracja
+
+~/.gitconfig
+```bash
+[user]
+  name = Roman Frołow
+  email = roman.frolow@computaris.com
+[color]
+  ui = true
+[alias]
+  st = status -sb
+  ci = commit
+  co = checkout
+  br = branch
+  logg = log --oneline --decorate --graph --all
+```
+
+---
+# Konfiguracja z linii komend
+
+```bash
+# set
+git config --global alias.st 'status -sb'
+git config --global alias.co checkout
+git config --global alias.ci checkin
+git config --global alias.br branch
+# get
+git config --global alias.st
+git config --global user.name
+```
+---
+# Lokalizacja konfiguracji
+
+- systemowa: /etc/gitconfig (windows %PROGRAMFILES(x86)%\Git\etc)\gitconfig)
+- użytkownika: ~/.gitconfig (windows %USERPROFILE%\.gitconfig)
+- repozytorium: .git/config
+
+---
+
+# Edycja konfiguracji
+
+```bash
+# System, applies to entire machine and all users
+$ git config --system --list
+$ git config --system --edit
+
+# User defined
+$ git config --global --list
+$ git config --global --edit
+```
+
+---
+
+# Pomoc
+
+```bash
+git help config
+```
+
+---
+
+# Pierwsze repozytorium
+
+```bash
+mkdir repo
+cd repo
+git init
+```
+
+---
+
+# Rozglądamy się po strukturze repozyotrium
+
+```bash
+ls .git
+```
+
+---
+# Podstawowe koncepty
+
+1. working copy
+2. reference
+3. HEAD
+4. stagin area
+5. stash
+
+# HEAD
+
+---
+# Internals
+
+http://git-scm.com/book/en/Git-Internals
+
+---
+# Typowe operacje
+
+```bash
+echo "1" > README.md
+git add -A
+git commit
+```
+
+---
+# Trudniejsze operacje
+
+```bash
+git reset --hard origin/master
+git rebase -i master
+```
+
+---
+
+# Zrobiłem zmiany a git diff nic nie pokazuje
+
+```bash
+echo 2 >> README.md
+git add -A
+echo 3 >> README.md
+git diff
+```
+
+---
+
+# Zrobiłem zmiany a git diff nic nie pokazuje
+
+Rozwiązanie:
+```bash
+git diff --cached
+```
+---
+
+# Zrobiłem zmiany a git diff nic nie pokazuje
+
+```bash
+# single file
+git reset HEAD -- path/to/file
+# current directory recursively
+git reset HEAD -- .
+# another way
+git rm --cached -r .
+```
+
+---
+# Workflows
+
+[git-flow-cheatsheet.pdf](git-flow-cheatsheet.pdf)
+
+---
+# Zewnętrzne programy
+
+---
+# SSH a różne klucze
+
+```bash
+ssh-keygen -t rsa -f ~/.ssh/github -C "roman.frolow@computaris.com"
+```
+
+~/.ssh/config
+```bash
+Host github.com
+IdentityFile ~/.ssh/github
+```
+
+---
+
+# Kopiujemy do schowka
+
+```bash
+# on linux
+xclip -sel clip < ~/.ssh/bitbucket_ordergroup.pub
+# on windows
+type ~/.ssh/bitbucket_ordergroup.pub | clip
+# on mac
+cat ~/.ssh/bitbucket_ordergroup.pub | pbcopy
+```
+
+---
+# Github vs Gerrit
+
+
+
+---
+
+# Odnośniki
+
+1. http://eagain.net/articles/git-for-computer-scientists/
+2. http://www.jayway.com/2013/03/03/git-is-a-purely-functional-data-structure/
+
 
     </textarea>
     <!--<script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">-->
